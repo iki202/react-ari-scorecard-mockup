@@ -65,13 +65,13 @@ export default class SCwindow extends React.Component {
     }
    
     render() {        
-      const { visible } = this.state;
+      //const { visible } = this.state;
       const item = this.props.Item;
 
       return (
         // visible ? <Window key={this.props.key} title={this.props.Item.Title} onClose={this.windowClosed} initialHeight={350}>
         // </Window> : null
-        <Window key={this.props.key} title={this.props.Item.Title} onClose={this.windowClosed} initialHeight={350}>
+        <Window key={this.props.key} title={this.props.Item.Title} onClose={this.windowClosed} initialHeight={500} initialWidth={350}>
 
         <Card style={{boxShadow: 'none', flex: '10 0 30.33%', margin: 10, border: 'none', borderBottom: '1px solid rgba(0,0,0,0.12)'}} >
           <CardBody style={{ padding: 0}}>
