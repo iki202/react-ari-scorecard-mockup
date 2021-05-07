@@ -124,13 +124,13 @@ export default class SCwindow extends React.Component {
                   </div>
 
                   <div >
-                    <Grid
-                      style={{ height: '300px' }}
+                     <Grid
+                      style={{ height: '300px', width: '100%' }}
                       data={[ ...scoreDetails ]}
                     >
-                      <Column field="Percentage" title="%" width="15px" />
-                      <Column field="Category" title="Category" width="120px" />
-                      <Column field="Events" title="Events"  width="30px"/>                      
+                      <Column field="Percentage" title="%" width="40"/>
+                      <Column field="Category" title="Category" width="125" />
+                      <Column field="Events" title="Events" />                      
                     </Grid>
                   </div>                  
                 </div>
@@ -145,13 +145,13 @@ export default class SCwindow extends React.Component {
                   </div>
 
                   <div >
-                    <Grid
+                     <Grid
                       style={{ height: '300px', width: '100%' }}
                       data={[ ...scoreDetails ]}
                     >
-                      <Column field="Percentage" title="%" width="15px" />
-                      <Column field="Category" title="Category" width="120px" />
-                      <Column field="Events" title="Events"  width="30px"/>                      
+                      <Column field="Percentage" title="%" width="40"/>
+                      <Column field="Category" title="Category" width="125" />
+                      <Column field="Events" title="Events" />                      
                     </Grid>
                   </div>                  
                 </div>
@@ -166,13 +166,13 @@ export default class SCwindow extends React.Component {
                   </div>
 
                   <div >
-                    <Grid
-                      style={{ height: '300px' }}
+                     <Grid
+                      style={{ height: '300px', width: '100%' }}
                       data={[ ...scoreDetails ]}
                     >
-                      <Column field="Percentage" title="%" width="15px" />
-                      <Column field="Category" title="Category" width="120px" />
-                      <Column field="Events" title="Events"  width="30px"/>                      
+                      <Column field="Percentage" title="%" width="40"/>
+                      <Column field="Category" title="Category" width="125" />
+                      <Column field="Events" title="Events" />                      
                     </Grid>
                   </div>                  
                 </div>
@@ -187,13 +187,13 @@ export default class SCwindow extends React.Component {
                   </div>
 
                   <div >
-                    <Grid
-                      style={{ height: '300px' }}
+                     <Grid
+                      style={{ height: '300px', width: '100%' }}
                       data={[ ...scoreDetails ]}
                     >
-                      <Column field="Percentage" title="%" width="15px" />
-                      <Column field="Category" title="Category" width="120px" />
-                      <Column field="Events" title="Events"  width="30px"/>                      
+                      <Column field="Percentage" title="%" width="40"/>
+                      <Column field="Category" title="Category" width="125" />
+                      <Column field="Events" title="Events" />                      
                     </Grid>
                   </div>                  
                 </div>
