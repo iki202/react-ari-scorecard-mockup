@@ -96,16 +96,21 @@ const DialogTitleBar = () => {
     );
 }
 
-var openWindows = [];
-
 class App extends React.Component {
-    state = {
-        //skip: 0,
-        //take: 3,
-        data: availableData, //availableData.splice(0, 12),        
-        //openDataItem: null,
-        openDataItems: []        
-    };
+    
+    constructor(props) {
+        super(props);
+
+        this.state = {
+          //skip: 0,
+          //take: 3,
+          data: availableData, //availableData.splice(0, 12),        
+          //openDataItem: null,
+          openDataItems: []        
+        }
+
+        this.openWindows = [];
+    }
 
     handlePageChange = (e) => {
         this.setState({
@@ -154,8 +159,8 @@ class App extends React.Component {
       this.state.openDataItems.map((ele) => { if(ele.Id != id) newOpenDataItems.push(ele); });
 
       let newOpenWindows = [];
-      openWindows.map((w) => { if(w.Id != id) newOpenWindows.push(w); });
-      openWindows = newOpenWindows;
+      this.openWindows.map((w) => { if(w.Id != id) newOpenWindows.push(w); });
+      this.openWindows = newOpenWindows;
 
       this.setState({
           //openDataItem: null,
@@ -166,11 +171,11 @@ class App extends React.Component {
     }
 
     windowOpened = (win) =>{
-      openWindows.push(win);
+      this.openWindows.push(win);
     }
 
     closeAllWins = () =>{
-      openWindows = [];
+      this.openWindows = [];
       this.setState({
           openDataItems: []          
       });
@@ -178,7 +183,7 @@ class App extends React.Component {
 
     rearrangeWins = () => {
       var curLeft = 0;
-      openWindows.forEach((win) => {
+      this.openWindows.forEach((win) => {
         console.log("top: " + win.top);
 
         win.top = 0;
