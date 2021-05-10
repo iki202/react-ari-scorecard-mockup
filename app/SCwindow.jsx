@@ -49,7 +49,7 @@ const ScorePanelBarTitle = ({ Title, Score }) => {
 export default class SCwindow extends React.Component {
     
     state = {
-        visible: true
+        //visible: true
     };
 
     componentDidUpdate(prevProps, prevState, snapshot){
@@ -58,20 +58,27 @@ export default class SCwindow extends React.Component {
 
     windowClosed = (e) =>{
       if(this.props.onClose)
-        this.props.onClose(this.props.Item.Id);
+        this.props.onClose(this.props.Item.Id, e.target);
       this.setState({
-          visible: false
+          //visible: false
       });
     }
+
+    // handleStageChange = (e)=>{
+    //   if(e.state === 'FULLSCREEN')
+    //     console.log('asdf');
+    // }
    
     render() {        
       //const { visible } = this.state;
       const item = this.props.Item;
 
       return (
-        // visible ? <Window key={this.props.key} title={this.props.Item.Title} onClose={this.windowClosed} initialHeight={350}>
+        // visible ? <Window key={item.Id} title={item.Title} onClose={this.windowClosed} initialHeight={350}>
         // </Window> : null
-        <Window key={this.props.key} title={this.props.Item.Title} onClose={this.windowClosed} initialHeight={500} initialWidth={350}>
+        // <Window key={item.Id} title={item.Title} onClose={this.windowClosed} initialHeight={500} initialWidth={350} onStageChange={this.handleStageChange}>
+        <Window ref={(p) => { this.props.onOpen(p); }}
+        id={''+item.Id} title={item.Title} onClose={this.windowClosed} initialHeight={500} initialWidth={this.props.initialWidth} >
 
         <Card style={{boxShadow: 'none', flex: '10 0 30.33%', margin: 10, border: 'none', borderBottom: '1px solid rgba(0,0,0,0.12)'}} >
           <CardBody style={{ padding: 0}}>
@@ -92,7 +99,7 @@ export default class SCwindow extends React.Component {
           </CardBody>          
           </Card>
 
-          <PanelBar expandMode="single">
+          <PanelBar expandMode="multiple">
               <PanelBarItem title={<ScorePanelBarTitle Title={"Telematics"} Score={"50"} />}>
                 <div>
                   <div >                    

@@ -2,11 +2,14 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { ListView, ListViewHeader } from '@progress/kendo-react-listview';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
+import { FloatingActionButton } from '@progress/kendo-react-buttons';
 
 import SClistViewItem from './SClistViewItem.jsx'
 import SCwindow from './SCwindow.jsx'
 
 import './kendo_default_all.css';
+
+const KENDO_WIN_WIDTH = 350;
 
 const articles = [ 
     {
@@ -93,14 +96,15 @@ const DialogTitleBar = () => {
     );
 }
 
+var openWindows = [];
 
 class App extends React.Component {
     state = {
         //skip: 0,
         //take: 3,
         data: availableData, //availableData.splice(0, 12),        
-        showingDataItem: null,
-        showingDataItems: []
+        //openDataItem: null,
+        openDataItems: []        
     };
 
     handlePageChange = (e) => {
@@ -122,44 +126,74 @@ class App extends React.Component {
         }
     }
 
-    setShowingItem = (item) =>{
+    setOpenItems = (item) =>{
       console.log("Opening Id: " + item.Id); 
-        let newShowingDataItems = [... this.state.showingDataItems];
-        newShowingDataItems.push(item);
-        newShowingDataItems = [...new Set(newShowingDataItems)];
+        let newOpenDataItems = [... this.state.openDataItems];
+        newOpenDataItems.push(item);
+        newOpenDataItems = [...new Set(newOpenDataItems)];
         
         this.setState({            
-            showingDataItem: item,
-            showingDataItems: newShowingDataItems
+            //openDataItem: item,
+            openDataItems: newOpenDataItems
         });
 
-        //console.log("setShowingItem this.state.showingDataItems: "+JSON.stringify(newShowingDataItems));
+        //console.log("setOpenItems this.state.openDataItems: "+JSON.stringify(newOpenDataItems));
     }
     
     toggleDialog = () => {      
         this.setState({
-            showingDataItem: null
+            openDataItem: null
         });
     }
 
-    windowClosed = (id) => {
-      console.log("Closing Id: " + id);      
+    windowClosed = (id, winRef) => {
+      console.log("Closing Id: " + id);
+      console.log("Closing Win Id: " + (winRef ? winRef.props.id : " is null"));
 
-      let newShowingDataItems = [];
-      this.state.showingDataItems.map((ele) => { if(ele.Id != id) newShowingDataItems.push(ele); });
+      let newOpenDataItems = [];      
+      this.state.openDataItems.map((ele) => { if(ele.Id != id) newOpenDataItems.push(ele); });
+
+      let newOpenWindows = [];
+      openWindows.map((w) => { if(w.Id != id) newOpenWindows.push(w); });
+      openWindows = newOpenWindows;
+
       this.setState({
-          showingDataItem: null,
-          showingDataItems: newShowingDataItems
+          //openDataItem: null,
+          openDataItems: newOpenDataItems,          
       });
 
-      //console.log("windowClosed this.state.showingDataItems: "+JSON.stringify(newShowingDataItems));
+      //console.log("windowClosed this.state.openDataItems: "+JSON.stringify(newOpenDataItems));
+    }
+
+    windowOpened = (win) =>{
+      openWindows.push(win);
+    }
+
+    closeAllWins = () =>{
+      openWindows = [];
+      this.setState({
+          openDataItems: []          
+      });
+    }
+
+    rearrangeWins = () => {
+      var curLeft = 0;
+      openWindows.forEach((win) => {
+        console.log("top: " + win.top);
+
+        win.top = 0;
+        win.left = curLeft;
+        win.width = KENDO_WIN_WIDTH;
+        win.height = window.innerHeight;
+        curLeft += KENDO_WIN_WIDTH;
+      });
     }
 
     render() {
         //const { skip, take } = this.state;
-        const { showingDataItem, showingDataItems } = this.state;
+        const { openDataItem, openDataItems } = this.state;
 
-        const MyCustomItem = props => <SClistViewItem {...props} setShowingItem={this.setShowingItem}  />;
+        const MyCustomItem = props => <SClistViewItem {...props} setOpenItems={this.setOpenItems}  />;
 
         return (
           // <div>
@@ -180,19 +214,34 @@ class App extends React.Component {
               header={myHeader}            
               />    
 
-            {/* {showingDataItem && <Dialog title={<DialogTitleBar Title={showingDataItem.Title} />} onClose={this.toggleDialog} width={300} height={400}>
-                <p>{showingDataItem.Subtitle}</p>
+            {/* {openDataItem && <Dialog title={<DialogTitleBar Title={openDataItem.Title} />} onClose={this.toggleDialog} width={300} height={400}>
+                <p>{openDataItem.Subtitle}</p>
                 <DialogActionsBar>
                 <button className="k-button k-flat k-primary" onClick={this.toggleDialog}>Close</button>
               </DialogActionsBar>
                 
               </Dialog>} */}
 
-              {                
-                showingDataItems.map((m, i) => {
-                    return <SCwindow id={m.Id} Item={m} onClose={this.windowClosed} />
-                })
-              }
+            {                
+              openDataItems.map((m, i) => {
+                  return <SCwindow initialWidth={KENDO_WIN_WIDTH} Item={m} onClose={this.windowClosed} onOpen={this.windowOpened} />
+              })
+            }
+            {
+              openDataItems && openDataItems.length > 0 && 
+              <FloatingActionButton align={{ vertical: 'bottom', horizontal: 'end' }} icon={'plus'} 
+	              items={[{ icon: 'plus', text: 'Rearrange' }, { icon: 'trash', text: 'Close All'}]} 
+                onItemClick={(e) => {
+                  if(e){                    
+                    if(e.itemProps.text === 'Rearrange'){
+                      this.rearrangeWins();
+                    }
+                    else if(e.itemProps.text === 'Close All'){
+                      this.closeAllWins();
+                    }
+                  }
+                }} />
+            }
           </div>
         );
     }

@@ -16,8 +16,8 @@ export default class SClistViewItem extends React.Component {
     }
 
     toggleDetails = (e) =>{
-      if(this.props.setShowingItem)
-        this.props.setShowingItem(this.props.dataItem);
+      if(this.props.setOpenItems)
+        this.props.setOpenItems(this.props.dataItem);
     }
    
     render() {
