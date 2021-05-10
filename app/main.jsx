@@ -157,10 +157,10 @@ class App extends React.Component {
       console.log("Closing Win Id: " + (winRef ? winRef.props.id : " is null"));
 
       let newOpenDataItems = [];      
-      this.state.openDataItems.map((ele) => { if(ele.Id != id) newOpenDataItems.push(ele); });
+      this.state.openDataItems.map((ele) => { if(ele && ele.Id !== id) newOpenDataItems.push(ele); });
 
       let newOpenWindows = [];
-      this.openWindows.map((w) => { if(w.Id != id) newOpenWindows.push(w); });
+      this.openWindows.map((w) => { if(w && w.Id !== id) newOpenWindows.push(w); });
       this.openWindows = newOpenWindows;
 
       this.setState({
