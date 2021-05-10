@@ -178,7 +178,8 @@ class App extends React.Component {
     closeAllWins = () =>{
       this.openWindows = [];
       this.setState({
-          openDataItems: []          
+          openDataItems: [],
+          openWinPositions: [{}]
       });
     }
 
@@ -194,16 +195,16 @@ class App extends React.Component {
       //   curLeft += KENDO_WIN_WIDTH;
       // });
 
-      let curLeft = 1;
+      let curLeft = ((this.state.openWinPositions.length > 0 && this.state.openWinPositions[0].left === -1)? -2 : -1);
       let newOpenWinPositions = [];
       this.state.openDataItems.map((ele) => { 
         newOpenWinPositions.push({
-            top: 1,
+            top: -1,
             left: curLeft,            
         });
         curLeft += KENDO_WIN_WIDTH;
         if(curLeft > window.innerWidth)
-          curLeft = 0;
+          curLeft = ((this.state.openWinPositions.length > 0 && this.state.openWinPositions[0].left === -1)? -2 : -1);
       });
 
       this.setState({

@@ -49,13 +49,13 @@ const ScorePanelBarTitle = ({ Title, Score }) => {
 export default class SCwindow extends React.Component {
     
     state = {        
-        left: 50,
-        top: 50
+        left: (this.props.position &&this.props.position.left) ? this.props.position.left : 0,
+        top: (this.props.position &&this.props.position.top) ? this.props.position.top : 0
     };
 
-    componentDidUpdate(prevProps, prevState, snapshot){
+    componentDidUpdate(prevProps, prevState, snapshot){        
         if((this.props.position.left && prevProps.position.left !== this.props.position.left)){
-            //|| (this.state.left !== this.props.position.left)){
+          //console.log("Postion of : " +item.Id + " Is: " +JSON.stringify(this.props.position));
           this.setState({
             left: this.props.position.left,
             top: this.props.position.top
@@ -78,8 +78,6 @@ export default class SCwindow extends React.Component {
     render() {        
       const { left, top } = this.state;
       const item = this.props.Item;
-
-      //console.log("Postion of : " +item.Id + " Is: " +JSON.stringify(this.props.position));
 
       return (        
         <Window ref={(p) => { this.props.onOpen(p); }} left={left} top={top} onMove={this.handleMove}
