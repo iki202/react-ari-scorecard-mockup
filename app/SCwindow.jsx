@@ -48,37 +48,41 @@ const ScorePanelBarTitle = ({ Title, Score }) => {
 
 export default class SCwindow extends React.Component {
     
-    state = {
-        //visible: true
+    state = {        
+        left: this.props.position.left ? this.props.position.left : 50,
+        top: this.props.position.top ? this.props.position.top : 50
     };
 
     componentDidUpdate(prevProps, prevState, snapshot){
-        
+        if(prevState.left !== this.props.position.left){
+          this.setState({
+            left: this.props.position.left,
+            top: this.props.position.top
+          });
+        }
     }
 
     windowClosed = (e) =>{
       if(this.props.onClose)
-        this.props.onClose(this.props.Item.Id, e.target);
-      this.setState({
-          //visible: false
-      });
+        this.props.onClose(this.props.Item.Id, e.target);      
     }
 
-    // handleStageChange = (e)=>{
-    //   if(e.state === 'FULLSCREEN')
-    //     console.log('asdf');
-    // }
-   
+    handleMove = (event) => {
+        this.setState({
+            left: event.left,
+            top: event.top
+        });
+    }
+
     render() {        
-      //const { visible } = this.state;
+      const { left, top } = this.state;
       const item = this.props.Item;
 
-      return (
-        // visible ? <Window key={item.Id} title={item.Title} onClose={this.windowClosed} initialHeight={350}>
-        // </Window> : null
-        // <Window key={item.Id} title={item.Title} onClose={this.windowClosed} initialHeight={500} initialWidth={350} onStageChange={this.handleStageChange}>
-        <Window ref={(p) => { this.props.onOpen(p); }}
-        id={''+item.Id} title={item.Title} onClose={this.windowClosed} initialHeight={500} initialWidth={this.props.initialWidth} >
+      //console.log("Postion of : " +item.Id + " Is: " +JSON.stringify(this.props.position));
+
+      return (        
+        <Window ref={(p) => { this.props.onOpen(p); }} left={left} top={top} onMove={this.handleMove}
+        key={''+item.Id} title={item.Title} onClose={this.windowClosed} initialHeight={500} initialWidth={this.props.initialWidth} >
 
         <Card style={{boxShadow: 'none', flex: '10 0 30.33%', margin: 10, border: 'none', borderBottom: '1px solid rgba(0,0,0,0.12)'}} >
           <CardBody style={{ padding: 0}}>

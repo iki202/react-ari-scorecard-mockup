@@ -106,7 +106,8 @@ class App extends React.Component {
           //take: 3,
           data: availableData, //availableData.splice(0, 12),        
           //openDataItem: null,
-          openDataItems: []        
+          openDataItems: [],
+          openWinPositions: [{}]
         }
 
         this.openWindows = [];
@@ -182,21 +183,37 @@ class App extends React.Component {
     }
 
     rearrangeWins = () => {
-      var curLeft = 0;
-      this.openWindows.forEach((win) => {
-        console.log("top: " + win.top);
+       //var curLeft = 0;
+      // this.openWindows.forEach((win) => {
+      //   console.log("top: " + win.top);
 
-        win.top = 0;
-        win.left = curLeft;
-        win.width = KENDO_WIN_WIDTH;
-        win.height = window.innerHeight;
+      //   win.top = 0;
+      //   win.left = curLeft;
+      //   win.width = KENDO_WIN_WIDTH;
+      //   win.height = window.innerHeight;
+      //   curLeft += KENDO_WIN_WIDTH;
+      // });
+
+      let curLeft = 1;
+      let newOpenWinPositions = [];
+      this.state.openDataItems.map((ele) => { 
+        newOpenWinPositions.push({
+            top: 1,
+            left: curLeft,            
+        });
         curLeft += KENDO_WIN_WIDTH;
+        if(curLeft > window.innerWidth)
+          curLeft = 0;
+      });
+
+      this.setState({
+          openWinPositions: newOpenWinPositions          
       });
     }
 
     render() {
         //const { skip, take } = this.state;
-        const { openDataItem, openDataItems } = this.state;
+        const { openDataItem, openDataItems, openWinPositions } = this.state;
 
         const MyCustomItem = props => <SClistViewItem {...props} setOpenItems={this.setOpenItems}  />;
 
@@ -216,7 +233,7 @@ class App extends React.Component {
               data={this.state.data}
               item={MyCustomItem}
               style={{ width: "100%", height: 550 }}
-              header={myHeader}            
+              header={myHeader}
               />    
 
             {/* {openDataItem && <Dialog title={<DialogTitleBar Title={openDataItem.Title} />} onClose={this.toggleDialog} width={300} height={400}>
@@ -229,7 +246,7 @@ class App extends React.Component {
 
             {                
               openDataItems.map((m, i) => {
-                  return <SCwindow initialWidth={KENDO_WIN_WIDTH} Item={m} onClose={this.windowClosed} onOpen={this.windowOpened} />
+                  return <SCwindow key={''+m.Id} position={(openWinPositions && openWinPositions[i]) ? openWinPositions[i] : {} } initialWidth={KENDO_WIN_WIDTH} Item={m} onClose={this.windowClosed} onOpen={this.windowOpened} />
               })
             }
             {
