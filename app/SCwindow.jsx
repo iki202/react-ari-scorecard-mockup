@@ -49,12 +49,13 @@ const ScorePanelBarTitle = ({ Title, Score }) => {
 export default class SCwindow extends React.Component {
     
     state = {        
-        left: this.props.position.left ? this.props.position.left : 50,
-        top: this.props.position.top ? this.props.position.top : 50
+        left: 50,
+        top: 50
     };
 
     componentDidUpdate(prevProps, prevState, snapshot){
-        if(prevState.left !== this.props.position.left){
+        if((this.props.position.left && prevProps.position.left !== this.props.position.left)){
+            //|| (this.state.left !== this.props.position.left)){
           this.setState({
             left: this.props.position.left,
             top: this.props.position.top
