@@ -252,14 +252,20 @@ class App extends React.Component {
             }
             {
               openDataItems && openDataItems.length > 0 && 
-              <FloatingActionButton align={{ vertical: 'bottom', horizontal: 'end' }} icon={'plus'} 
-	              items={[{ icon: 'plus', text: 'Rearrange' }, { icon: 'trash', text: 'Close All'}]} 
+              <FloatingActionButton align={{ vertical: 'bottom', horizontal: 'end' }} icon={'gear'} 
+	              items={[{ icon: 'sort-asc', text: 'Organize' }, { icon: 'close', text: 'Close All'}]} 
                 onItemClick={(e) => {
                   if(e){                    
-                    if(e.itemProps.text === 'Rearrange'){
+                    // if(e.itemProps.text === 'Organize'){
+                    //   this.rearrangeWins();
+                    // }
+                    // else if(e.itemProps.text === 'Close All'){
+                    //   this.closeAllWins();
+                    // }
+                    if(e.itemIndex === 0){
                       this.rearrangeWins();
                     }
-                    else if(e.itemProps.text === 'Close All'){
+                    else if(e.itemIndex === 1){
                       this.closeAllWins();
                     }
                   }
