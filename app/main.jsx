@@ -15,6 +15,7 @@ const KENDO_WIN_WIDTH = 350;
 const articles = [ 
     {
         "Id": 0,
+        "Devision": "01",
         "Title": "Pepita Pepperdale",
         "Subtitle": "98A",
         "Risk": "STEADY",
@@ -22,52 +23,59 @@ const articles = [
     },
     {
       "Id": 1,
-        "Title": "Scott Tennyson",
-        "Subtitle": "76C",
-        "Risk": "RISKER",
-        "Image":"https://drive.google.com/uc?export=view&id=1Um1HHzTqSNaB5W4KfNrI3UkFTzBZoC9K"
+      "Devision": "01",
+      "Title": "Scott Tennyson",
+      "Subtitle": "76C",
+      "Risk": "RISKER",
+      "Image":"https://drive.google.com/uc?export=view&id=1Um1HHzTqSNaB5W4KfNrI3UkFTzBZoC9K"
     },
     {
       "Id": 2,
-        "Title": "Harrieta Stormsdale",
-        "Subtitle": "72C",
-        "Risk": "SAFER",
-        "Image":"https://drive.google.com/uc?export=view&id=1V80_qV7gxRDs9KR7seTgCMSe-DagNvQ9"
+      "Devision": "01",
+      "Title": "Harrieta Stormsdale",
+      "Subtitle": "72C",
+      "Risk": "SAFER",
+      "Image":"https://drive.google.com/uc?export=view&id=1V80_qV7gxRDs9KR7seTgCMSe-DagNvQ9"
     },
     {
       "Id": 3,
-        "Title": "Iman Hosseini",
-        "Subtitle": "75C",
-        "Risk": "RISKER",
-        "Image":"https://drive.google.com/uc?export=view&id=1Um1HHzTqSNaB5W4KfNrI3UkFTzBZoC9K"
+      "Devision": "02",
+      "Title": "Iman Hosseini",
+      "Subtitle": "75C",
+      "Risk": "RISKER",
+      "Image":"https://drive.google.com/uc?export=view&id=1Um1HHzTqSNaB5W4KfNrI3UkFTzBZoC9K"
     },
     {
       "Id": 4,
-        "Title": "Ray Adici",
-        "Subtitle": "99A",
-        "Risk": "STEADY",
-        "Image":"https://drive.google.com/uc?export=view&id=15_qDaQnd0J7XkgIzzCd_mqEjYXOKCaUT"
+      "Devision": "02",
+      "Title": "Ray Adici",
+      "Subtitle": "99A",
+      "Risk": "STEADY",
+      "Image":"https://drive.google.com/uc?export=view&id=15_qDaQnd0J7XkgIzzCd_mqEjYXOKCaUT"
     },
     {
       "Id": 5,
-        "Title": "Harold Nosleep",
-        "Subtitle": "70C",
-        "Risk": "SAFER",
-        "Image":"https://drive.google.com/uc?export=view&id=1V80_qV7gxRDs9KR7seTgCMSe-DagNvQ9"
+      "Devision": "02",
+      "Title": "Harold Nosleep",
+      "Subtitle": "70C",
+      "Risk": "SAFER",
+      "Image":"https://drive.google.com/uc?export=view&id=1V80_qV7gxRDs9KR7seTgCMSe-DagNvQ9"
     },
     {
       "Id": 6,
-        "Title": "Scott Smith",
-        "Subtitle": "78C",
-        "Risk": "RISKER",
-        "Image":"https://drive.google.com/uc?export=view&id=1Um1HHzTqSNaB5W4KfNrI3UkFTzBZoC9K"
+      "Devision": "03",
+      "Title": "Scott Smith",
+      "Subtitle": "78C",
+      "Risk": "RISKER",
+      "Image":"https://drive.google.com/uc?export=view&id=1Um1HHzTqSNaB5W4KfNrI3UkFTzBZoC9K"
     },
     {
       "Id": 7,
-        "Title": "Paul Pepe",
-        "Subtitle": "96A",
-        "Risk": "STEADY",
-        "Image":"https://drive.google.com/uc?export=view&id=15_qDaQnd0J7XkgIzzCd_mqEjYXOKCaUT"
+      "Devision": "04",
+      "Title": "Paul Pepe",
+      "Subtitle": "96A",
+      "Risk": "STEADY",
+      "Image":"https://drive.google.com/uc?export=view&id=15_qDaQnd0J7XkgIzzCd_mqEjYXOKCaUT"
     },
 ]
 
