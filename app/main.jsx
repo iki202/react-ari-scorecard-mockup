@@ -12,6 +12,16 @@ import './kendo_default_all.css';
 
 const KENDO_WIN_WIDTH = 350;
 
+const companyData = [ 
+    {
+        "Id": 0,
+        "Devision": "01",
+        "Title": "COMPANY RESULT",
+        "Subtitle": "98A",
+        "Risk": "STEADY",
+        "Image":"https://drive.google.com/uc?export=view&id=15_qDaQnd0J7XkgIzzCd_mqEjYXOKCaUT"
+    }
+]
 const articles = [ 
     {
         "Id": 0,
@@ -118,7 +128,8 @@ class App extends React.Component {
           openDataItems: [],
           openWinPositions: [{}],
 
-          searchMode: 'p'//p: people d: devision c: company
+          searchMode: 'p', //p: people d: devision c: company
+          selectedValues: null
         }
 
         this.openWindows = [];
@@ -225,12 +236,19 @@ class App extends React.Component {
 
     setSearchMode = (mode) =>{
       this.closeAllWins();
-      this.setState({searchMode: mode})
+      this.setState({
+        searchMode: mode,
+        selectedValues: null
+      })
+    }
+
+    handleSelectChange = (event) =>{      
+      this.setState({selectedValues: event.value})
     }
 
     render() {
         //const { skip, take } = this.state;
-        const { openDataItem, openDataItems, openWinPositions, searchMode } = this.state;
+        const { data, openDataItem, openDataItems, openWinPositions, searchMode, selectedValues } = this.state;
 
         const MyCustomItem = props => <SClistViewItem {...props} setOpenItems={this.setOpenItems}  />;
 
@@ -255,15 +273,28 @@ class App extends React.Component {
                       onClick={e => this.setSearchMode('p')}>{'People'}</Button>
               </ButtonGroup>
             </div>
+              {(searchMode === 'p' || searchMode === 'd') &&
+              <div className={'centerInDiv'}>
+                <MultiSelect
+                  data={data}
+                  onChange={this.handleSelectChange}
+                  value={selectedValues}
+                  textField= {searchMode === 'd' ? 'Devision' : 'Title'}
+                  dataItemKey='Id'
+                />
+                </div>
+              }            
             <br/>
-            <ListView
-              //onScroll={this.scrollHandler}
-              data={this.state.data}
-              item={MyCustomItem}
-              style={{ width: "100%", height: 550 }}
-              header={myHeader}
-              />    
-
+            { searchMode === 'c' ? 
+              <SClistViewItem dataItem={companyData[0]} setOpenItems={this.setOpenItems}  /> :
+              <ListView
+                //onScroll={this.scrollHandler}
+                data={(selectedValues && selectedValues[0]) ? selectedValues : data}
+                item={MyCustomItem}
+                style={{ width: "100%", height: 550 }}
+                header={myHeader}
+              />
+            }
             {/* {openDataItem && <Dialog title={<DialogTitleBar Title={openDataItem.Title} />} onClose={this.toggleDialog} width={300} height={400}>
                 <p>{openDataItem.Subtitle}</p>
                 <DialogActionsBar>
