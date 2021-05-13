@@ -4,6 +4,7 @@ import { ListView, ListViewHeader } from '@progress/kendo-react-listview';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { FloatingActionButton, Button, ButtonGroup } from '@progress/kendo-react-buttons';
 import { MultiSelect } from '@progress/kendo-react-dropdowns';
+import { filterBy } from "@progress/kendo-data-query";
 
 import SClistViewItem from './SClistViewItem.jsx'
 import SCwindow from './SCwindow.jsx'
@@ -248,7 +249,7 @@ class App extends React.Component {
 
     handleFilterChange = (event) => {
       this.setState({
-        data: filterBy(countries.slice(), event.filter),
+        data: filterBy(availableData.slice(), event.filter),
       });
     };
 
@@ -282,8 +283,10 @@ class App extends React.Component {
             {(searchMode === 'p' || searchMode === 'd') &&
               <div style={{ margin: 'auto', width: '500px' }}>
                 <MultiSelect
+                  filterable
                   data={data}
                   onChange={this.handleSelectChange}
+                  onFilterChange={this.handleFilterChange}
                   value={selectedValues}
                   textField= {searchMode === 'd' ? 'Devision' : 'Title'}
                   dataItemKey='Id'
