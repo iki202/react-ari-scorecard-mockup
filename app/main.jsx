@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { ListView, ListViewHeader } from '@progress/kendo-react-listview';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
-import { FloatingActionButton } from '@progress/kendo-react-buttons';
+import { FloatingActionButton, Button, ButtonGroup } from '@progress/kendo-react-buttons';
+import { MultiSelect } from '@progress/kendo-react-dropdowns';
 
 import SClistViewItem from './SClistViewItem.jsx'
 import SCwindow from './SCwindow.jsx'
@@ -107,7 +108,9 @@ class App extends React.Component {
           data: availableData, //availableData.splice(0, 12),        
           //openDataItem: null,
           openDataItems: [],
-          openWinPositions: [{}]
+          openWinPositions: [{}],
+
+          searchMode: 'p'//p: people d: devision c: company
         }
 
         this.openWindows = [];
@@ -212,9 +215,14 @@ class App extends React.Component {
       });
     }
 
+    setSearchMode = (mode) =>{
+      this.closeAllWins();
+      this.setState({searchMode: mode})
+    }
+
     render() {
         //const { skip, take } = this.state;
-        const { openDataItem, openDataItems, openWinPositions } = this.state;
+        const { openDataItem, openDataItems, openWinPositions, searchMode } = this.state;
 
         const MyCustomItem = props => <SClistViewItem {...props} setOpenItems={this.setOpenItems}  />;
 
@@ -229,6 +237,17 @@ class App extends React.Component {
           //   <Pager skip={skip} take={take} onPageChange={this.handlePageChange} total={articles.length} />
           // </div>
           <div>
+            <div className={'centerInDiv'}>
+              <ButtonGroup>
+                  <Button type="button" icon="globe" className={searchMode === 'c' ? 'k-state-active' : ''} 
+                      onClick={e => this.setSearchMode('c')}>{'Company'}</Button>
+                  <Button type="button" icon="connector" className={searchMode === 'd' ? 'k-state-active' : ''} 
+                      onClick={e => this.setSearchMode('d')}>{'Devision'}</Button>
+                  <Button type="button" icon="user" className={searchMode === 'p' ? 'k-state-active' : ''} 
+                      onClick={e => this.setSearchMode('p')}>{'People'}</Button>
+              </ButtonGroup>
+            </div>
+            <br/>
             <ListView
               //onScroll={this.scrollHandler}
               data={this.state.data}
