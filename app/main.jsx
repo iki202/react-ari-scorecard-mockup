@@ -246,6 +246,12 @@ class App extends React.Component {
       this.setState({selectedValues: event.value})
     }
 
+    handleFilterChange = (event) => {
+      this.setState({
+        data: filterBy(countries.slice(), event.filter),
+      });
+    };
+
     render() {
         //const { skip, take } = this.state;
         const { data, openDataItem, openDataItems, openWinPositions, searchMode, selectedValues } = this.state;
@@ -263,7 +269,7 @@ class App extends React.Component {
           //   <Pager skip={skip} take={take} onPageChange={this.handlePageChange} total={articles.length} />
           // </div>
           <div>
-            <div className={'centerInDiv'}>
+            <div style={{ margin: 'auto', width: '300px' }}>
               <ButtonGroup>
                   <Button type="button" icon="globe" className={searchMode === 'c' ? 'k-state-active' : ''} 
                       onClick={e => this.setSearchMode('c')}>{'Company'}</Button>
@@ -273,8 +279,8 @@ class App extends React.Component {
                       onClick={e => this.setSearchMode('p')}>{'People'}</Button>
               </ButtonGroup>
             </div>
-              {(searchMode === 'p' || searchMode === 'd') &&
-              <div className={'centerInDiv'}>
+            {(searchMode === 'p' || searchMode === 'd') &&
+              <div style={{ margin: 'auto', width: '500px' }}>
                 <MultiSelect
                   data={data}
                   onChange={this.handleSelectChange}
@@ -282,8 +288,8 @@ class App extends React.Component {
                   textField= {searchMode === 'd' ? 'Devision' : 'Title'}
                   dataItemKey='Id'
                 />
-                </div>
-              }            
+              </div>
+            }
             <br/>
             { searchMode === 'c' ? 
               <SClistViewItem dataItem={companyData[0]} setOpenItems={this.setOpenItems}  /> :

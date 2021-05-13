@@ -25,7 +25,7 @@ export default class SClistViewItem extends React.Component {
         const { expanded } = this.state;
 
         return (
-           <Card style={{ maxWidth: 300, boxShadow: 'none', flex: '10 0 30.33%', margin: 10, border: 'none', borderBottom: '1px solid rgba(0,0,0,0.12)'}} >
+           <Card style={{ maxWidth: 300, maxHeight: 135, boxShadow: 'none', flex: '10 0 30.33%', margin: 10, border: 'none', borderBottom: '1px solid rgba(0,0,0,0.12)'}} >
           <CardBody style={{ padding: 0}}>
             <div style={{ padding: 0, float: 'left' }}>
               <CardTitle>
