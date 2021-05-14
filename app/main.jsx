@@ -315,7 +315,8 @@ class App extends React.Component {
 
             {                
               openDataItems.map((m, i) => {
-                  return <SCwindow key={''+m.Id} position={(openWinPositions && openWinPositions[i]) ? openWinPositions[i] : {} } initialWidth={KENDO_WIN_WIDTH} Item={m} onClose={this.windowClosed} onOpen={this.windowOpened} />
+                  return <SCwindow key={''+m.Id} position={(openWinPositions && openWinPositions[i]) ? openWinPositions[i] : {} } 
+                          initialWidth={KENDO_WIN_WIDTH} Item={m} onClose={this.windowClosed} onOpen={this.windowOpened} searchMode={searchMode}/>
               })
             }
             {

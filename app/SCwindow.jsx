@@ -87,7 +87,7 @@ export default class SCwindow extends React.Component {
           <CardBody style={{ padding: 0}}>
             <div style={{ padding: 0, float: 'left' }}>
               <CardTitle>
-                {item.Title}
+                {this.props.searchMode === 'd' ? item.Division : item.Title}
               </CardTitle>
               <CardSubtitle className='cardScore'>
                 <span>{item.Subtitle}</span>                 
