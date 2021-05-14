@@ -29,7 +29,7 @@ export default class SClistViewItem extends React.Component {
           <CardBody style={{ padding: 0}}>
             <div style={{ padding: 0, float: 'left' }}>
               <CardTitle>
-                {item.Title}
+                {this.props.searchMode === 'd' ? item.Division : item.Title}
               </CardTitle>
               <CardSubtitle className='cardScore'>
                 <button title={"Show Details"} className="k-button k-flat cardScore" onClick={this.toggleDetails}>{item.Subtitle}</button>                 

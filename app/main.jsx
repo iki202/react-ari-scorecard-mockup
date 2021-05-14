@@ -258,7 +258,7 @@ class App extends React.Component {
         //const { skip, take } = this.state;
         const { data, openDataItem, openDataItems, openWinPositions, searchMode, selectedValues } = this.state;
 
-        const MyCustomItem = props => <SClistViewItem {...props} setOpenItems={this.setOpenItems}  />;
+        const MyCustomItem = props => <SClistViewItem {...props} setOpenItems={this.setOpenItems} searchMode={searchMode} />;
 
         return (
           // <div>
