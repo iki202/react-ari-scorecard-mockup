@@ -26,7 +26,7 @@ const companyData = [
 const articles = [ 
     {
         "Id": 0,
-        "Devision": "01",
+        "Devision": "02",
         "Title": "Pepita Pepperdale",
         "Subtitle": "98A",
         "Risk": "STEADY",
@@ -34,7 +34,7 @@ const articles = [
     },
     {
       "Id": 1,
-      "Devision": "01",
+      "Devision": "03",
       "Title": "Scott Tennyson",
       "Subtitle": "76C",
       "Risk": "RISKER",
@@ -42,7 +42,7 @@ const articles = [
     },
     {
       "Id": 2,
-      "Devision": "01",
+      "Devision": "04",
       "Title": "Harrieta Stormsdale",
       "Subtitle": "72C",
       "Risk": "SAFER",
@@ -50,7 +50,7 @@ const articles = [
     },
     {
       "Id": 3,
-      "Devision": "02",
+      "Devision": "05",
       "Title": "Iman Hosseini",
       "Subtitle": "75C",
       "Risk": "RISKER",
@@ -58,7 +58,7 @@ const articles = [
     },
     {
       "Id": 4,
-      "Devision": "02",
+      "Devision": "06",
       "Title": "Ray Adici",
       "Subtitle": "99A",
       "Risk": "STEADY",
@@ -66,7 +66,7 @@ const articles = [
     },
     {
       "Id": 5,
-      "Devision": "02",
+      "Devision": "07",
       "Title": "Harold Nosleep",
       "Subtitle": "70C",
       "Risk": "SAFER",
@@ -74,7 +74,7 @@ const articles = [
     },
     {
       "Id": 6,
-      "Devision": "03",
+      "Devision": "08",
       "Title": "Scott Smith",
       "Subtitle": "78C",
       "Risk": "RISKER",
@@ -82,7 +82,7 @@ const articles = [
     },
     {
       "Id": 7,
-      "Devision": "04",
+      "Devision": "09",
       "Title": "Paul Pepe",
       "Subtitle": "96A",
       "Risk": "STEADY",
@@ -93,7 +93,8 @@ const articles = [
 const createLargeData = () => {
     const aryAdd = articles.map(a => Object.assign({}, a));    
     aryAdd.map((m) => {      
-      m.Id = m.Id +8;      
+      m.Id = m.Id +8;
+      m.Devision = m.Devision + "2";
       m.Title = m.Title + " - 2";
     });
     return [... articles, ... aryAdd];
