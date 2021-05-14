@@ -16,7 +16,7 @@ const KENDO_WIN_WIDTH = 360;
 const companyData = [ 
     {
         "Id": 0,
-        "Devision": "01",
+        "Division": "01",
         "Title": "COMPANY RESULT",
         "Subtitle": "98A",
         "Risk": "STEADY",
@@ -26,7 +26,7 @@ const companyData = [
 const articles = [ 
     {
         "Id": 0,
-        "Devision": "02",
+        "Division": "02",
         "Title": "Pepita Pepperdale",
         "Subtitle": "98A",
         "Risk": "STEADY",
@@ -34,7 +34,7 @@ const articles = [
     },
     {
       "Id": 1,
-      "Devision": "03",
+      "Division": "03",
       "Title": "Scott Tennyson",
       "Subtitle": "76C",
       "Risk": "RISKER",
@@ -42,7 +42,7 @@ const articles = [
     },
     {
       "Id": 2,
-      "Devision": "04",
+      "Division": "04",
       "Title": "Harrieta Stormsdale",
       "Subtitle": "72C",
       "Risk": "SAFER",
@@ -50,7 +50,7 @@ const articles = [
     },
     {
       "Id": 3,
-      "Devision": "05",
+      "Division": "05",
       "Title": "Iman Hosseini",
       "Subtitle": "75C",
       "Risk": "RISKER",
@@ -58,7 +58,7 @@ const articles = [
     },
     {
       "Id": 4,
-      "Devision": "06",
+      "Division": "06",
       "Title": "Ray Adici",
       "Subtitle": "99A",
       "Risk": "STEADY",
@@ -66,7 +66,7 @@ const articles = [
     },
     {
       "Id": 5,
-      "Devision": "07",
+      "Division": "07",
       "Title": "Harold Nosleep",
       "Subtitle": "70C",
       "Risk": "SAFER",
@@ -74,7 +74,7 @@ const articles = [
     },
     {
       "Id": 6,
-      "Devision": "08",
+      "Division": "08",
       "Title": "Scott Smith",
       "Subtitle": "78C",
       "Risk": "RISKER",
@@ -82,7 +82,7 @@ const articles = [
     },
     {
       "Id": 7,
-      "Devision": "09",
+      "Division": "09",
       "Title": "Paul Pepe",
       "Subtitle": "96A",
       "Risk": "STEADY",
@@ -94,7 +94,7 @@ const createLargeData = () => {
     const aryAdd = articles.map(a => Object.assign({}, a));    
     aryAdd.map((m) => {      
       m.Id = m.Id +8;
-      m.Devision = m.Devision + "2";
+      m.Division = m.Division + "2";
       m.Title = m.Title + " - 2";
     });
     return [... articles, ... aryAdd];
@@ -276,7 +276,7 @@ class App extends React.Component {
                   <Button type="button" icon="globe" className={searchMode === 'c' ? 'k-state-active' : ''} 
                       onClick={e => this.setSearchMode('c')}>{'Company'}</Button>
                   <Button type="button" icon="connector" className={searchMode === 'd' ? 'k-state-active' : ''} 
-                      onClick={e => this.setSearchMode('d')}>{'Devision'}</Button>
+                      onClick={e => this.setSearchMode('d')}>{'Divisions'}</Button>
                   <Button type="button" icon="user" className={searchMode === 'p' ? 'k-state-active' : ''} 
                       onClick={e => this.setSearchMode('p')}>{'People'}</Button>
               </ButtonGroup>
@@ -289,7 +289,7 @@ class App extends React.Component {
                   onChange={this.handleSelectChange}
                   onFilterChange={this.handleFilterChange}
                   value={selectedValues}
-                  textField= {searchMode === 'd' ? 'Devision' : 'Title'}
+                  textField= {searchMode === 'd' ? 'Division' : 'Title'}
                   dataItemKey='Id'
                 />
               </div>
