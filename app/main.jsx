@@ -11,7 +11,7 @@ import SCwindow from './SCwindow.jsx'
 
 import './kendo_default_all.css';
 
-const KENDO_WIN_WIDTH = 350;
+const KENDO_WIN_WIDTH = 360;
 
 const companyData = [ 
     {
