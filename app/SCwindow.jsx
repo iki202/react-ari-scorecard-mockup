@@ -80,8 +80,10 @@ export default class SCwindow extends React.Component {
       const item = this.props.Item;
 
       return (        
-        <Window ref={(p) => { this.props.onOpen(p); }} left={left} top={top} onMove={this.handleMove}
-        key={''+item.Id} title={item.Title} onClose={this.windowClosed} initialHeight={500} initialWidth={this.props.initialWidth} >
+        // <Window ref={(p) => { this.props.onOpen(p); }} left={left} top={top} onMove={this.handleMove} 
+        // key={''+item.Id} {this.props.searchMode === 'd' ? item.Division : item.Title} onClose={this.windowClosed} initialHeight={500} initialWidth={this.props.initialWidth} >
+        <Window ref={(p) => { this.props.onOpen(p); }} modal minimizeButton={()=> null}
+          key={''+item.Id} title={this.props.searchMode === 'd' ? item.Division : item.Title} onClose={this.windowClosed} initialHeight={500} initialWidth={this.props.initialWidth} >
 
         <Card style={{boxShadow: 'none', flex: '10 0 30.33%', margin: 10, border: 'none', borderBottom: '1px solid rgba(0,0,0,0.12)'}} >
           <CardBody style={{ padding: 0}}>
