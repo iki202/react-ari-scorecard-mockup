@@ -302,7 +302,7 @@ class App extends React.Component {
                 data={(selectedValues && selectedValues[0]) ? selectedValues : data}
                 item={MyCustomItem}
                 style={{ width: "100%", height: 550 }}
-                header={myHeader}
+                header={myHeader}              
               />
             }
             {/* {openDataItem && <Dialog title={<DialogTitleBar Title={openDataItem.Title} />} onClose={this.toggleDialog} width={300} height={400}>

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Card, CardBody, CardTitle, CardImage, CardSubtitle, CardActions } from '@progress/kendo-react-layout';
+import { Checkbox } from "@progress/kendo-react-inputs";
 
 export default class SClistViewItem extends React.Component {
     
@@ -43,7 +44,8 @@ export default class SClistViewItem extends React.Component {
             </div>        
           </CardBody>
            <CardActions style={{ padding: 0}}>
-            <span className="k-button k-flat k-primary" onClick={this.toggleDetails}>Details</span> 
+            {/* <span className="k-button k-flat k-primary" onClick={this.toggleDetails}>Details</span> */}
+            <Checkbox className="k-button k-flat k-primary"  label={"Select to compare"} />
           </CardActions>
           </Card>
         );
