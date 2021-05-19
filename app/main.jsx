@@ -275,7 +275,8 @@ class App extends React.Component {
                                         setOpenItems={this.setOpenItems} 
                                         searchMode={searchMode}
                                         addSelectedItemId={this.addSelectedItemId}
-                                        removeSelectedItemId={this.removeSelectedItemId} />;
+                                        removeSelectedItemId={this.removeSelectedItemId}
+                                        selectedItemIds={selectedItemIds} />;
 
         return (
           // <div>

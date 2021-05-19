@@ -9,20 +9,27 @@ export default class SClistViewItem extends React.Component {
         checked: false
     };
 
-    componentDidUpdate(prevProps, prevState, snapshot){
+    componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.dataItem.Id !== this.props.dataItem.Id){
             this.setState({
                 item: this.props.dataItem
             });
         }
+
+        if(JSON.stringify(prevProps.selectedItemIds) !== JSON.stringify(this.props.selectedItemIds)){
+            this.setState({
+                checked: (this.props.selectedItemIds.indexOf(this.props.dataItem.Id) > -1)
+            });
+        }
     }
 
-    toggleDetails = (e) =>{
+    toggleDetails = (e) => {
       if(this.props.setOpenItems)
         this.props.setOpenItems(this.props.dataItem);
     }
 
-    handleChange = (e) =>{
+    handleChange = (e) => {
+      console.log("e.value " + e.value);
       if(e.value && this.props.addSelectedItemId)
         this.props.addSelectedItemId(this.props.dataItem.Id);
       
@@ -39,7 +46,7 @@ export default class SClistViewItem extends React.Component {
         const { checked } = this.state;
 
         return (
-           <Card style={{ maxWidth: 300, maxHeight: 135, boxShadow: 'none', flex: '10 0 30.33%', margin: 10, border: 'none', borderBottom: '1px solid rgba(0,0,0,0.12)'}} >
+          <Card style={{ maxWidth: 300, maxHeight: 135, boxShadow: 'none', flex: '10 0 30.33%', margin: 10, border: 'none',         borderBottom: '1px solid rgba(0,0,0,0.12)'}} >
           <CardBody style={{ padding: 0}}>
             <div style={{ padding: 0, float: 'left' }}>
               <CardTitle>
