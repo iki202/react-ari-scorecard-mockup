@@ -6,7 +6,7 @@ export default class SClistViewItem extends React.Component {
     
     state = {
         item: this.props.dataItem,
-        checked: false
+        //checked: false
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -16,11 +16,11 @@ export default class SClistViewItem extends React.Component {
             });
         }
 
-        if(JSON.stringify(prevProps.selectedItemIds) !== JSON.stringify(this.props.selectedItemIds)){
-            this.setState({
-                checked: (this.props.selectedItemIds.indexOf(this.props.dataItem.Id) > -1)
-            });
-        }
+        // if(JSON.stringify(prevProps.selectedItemIds) !== JSON.stringify(this.props.selectedItemIds)){
+        //     this.setState({
+        //         checked: (this.props.selectedItemIds.indexOf(this.props.dataItem.Id) > -1)
+        //     });
+        // }
     }
 
     toggleDetails = (e) => {
@@ -36,14 +36,14 @@ export default class SClistViewItem extends React.Component {
       if(!e.value && this.props.removeSelectedItemId)
         this.props.removeSelectedItemId(this.props.dataItem.Id);
 
-      this.setState({
-          checked: e.value
-      });
+      // this.setState({
+      //     checked: e.value
+      // });
     }
    
     render() {
         const item = this.props.dataItem;
-        const { checked } = this.state;
+        //const { checked } = this.state;
 
         return (
           <Card style={{ maxWidth: 300, maxHeight: 135, boxShadow: 'none', flex: '10 0 30.33%', margin: 10, border: 'none',         borderBottom: '1px solid rgba(0,0,0,0.12)'}} >
@@ -65,7 +65,7 @@ export default class SClistViewItem extends React.Component {
           </CardBody>
            <CardActions style={{ padding: 0}}>
             {/* <span className="k-button k-flat k-primary" onClick={this.toggleDetails}>Details</span> */}
-            <Checkbox className="k-button k-flat k-primary" label={"Select to compare"} checked={checked} onChange={this.handleChange}/>
+            <Checkbox className="k-button k-flat k-primary" label={"Select to compare"} checked={this.props.selected} onChange={this.handleChange}/>
           </CardActions>
           </Card>
         );

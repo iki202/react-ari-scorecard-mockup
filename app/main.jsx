@@ -262,7 +262,7 @@ class App extends React.Component {
     }
 
     removeSelectedItemId = (id) => {
-      this.setState({selectedItemIds: this.state.selectedItemIds.filter((itemId) => { itemId === id })});
+      this.setState({selectedItemIds: this.state.selectedItemIds.filter(itemId => itemId !== id)});
     }
 
     render() {
@@ -276,7 +276,8 @@ class App extends React.Component {
                                         searchMode={searchMode}
                                         addSelectedItemId={this.addSelectedItemId}
                                         removeSelectedItemId={this.removeSelectedItemId}
-                                        selectedItemIds={selectedItemIds} />;
+                                        //selectedItemIds={selectedItemIds}
+                                        selected={(selectedItemIds.indexOf(props.dataItem.Id) > -1)} />;
 
         return (
           // <div>
