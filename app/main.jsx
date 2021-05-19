@@ -131,7 +131,8 @@ class App extends React.Component {
           openWinPositions: [{}],
 
           searchMode: 'p', //p: people d: devision c: company
-          selectedValues: null
+          selectedValues: null,
+          selectedItemIds: []
         }
 
         this.openWindows = [];
@@ -254,11 +255,27 @@ class App extends React.Component {
       });
     };
 
+    addSelectedItemId = (id) => {
+      let newselectedItemIds = [... this.state.selectedItemIds];
+      newselectedItemIds.push(id);
+      this.setState({selectedItemIds: newselectedItemIds});
+    }
+
+    removeSelectedItemId = (id) => {
+      this.setState({selectedItemIds: this.state.selectedItemIds.filter((itemId) => { itemId === id })});
+    }
+
     render() {
         //const { skip, take } = this.state;
-        const { data, openDataItem, openDataItems, openWinPositions, searchMode, selectedValues } = this.state;
+        const { data, openDataItem, openDataItems, openWinPositions, searchMode, selectedValues, selectedItemIds } = this.state;
 
-        const MyCustomItem = props => <SClistViewItem {...props} setOpenItems={this.setOpenItems} searchMode={searchMode} />;
+        console.log(" this.state.selectedItemIds: "+JSON.stringify(selectedItemIds));
+
+        const MyCustomItem = props => <SClistViewItem {...props} 
+                                        setOpenItems={this.setOpenItems} 
+                                        searchMode={searchMode}
+                                        addSelectedItemId={this.addSelectedItemId}
+                                        removeSelectedItemId={this.removeSelectedItemId} />;
 
         return (
           // <div>

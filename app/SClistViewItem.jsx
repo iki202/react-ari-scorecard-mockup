@@ -20,6 +20,14 @@ export default class SClistViewItem extends React.Component {
       if(this.props.setOpenItems)
         this.props.setOpenItems(this.props.dataItem);
     }
+
+    handleChange = (e) =>{
+      if(e.value && this.props.addSelectedItemId)
+        this.props.addSelectedItemId(this.props.dataItem.Id);
+      
+      if(!e.value && this.props.removeSelectedItemId)
+        this.props.removeSelectedItemId(this.props.dataItem.Id);
+    }
    
     render() {
         const item = this.props.dataItem;
@@ -45,7 +53,7 @@ export default class SClistViewItem extends React.Component {
           </CardBody>
            <CardActions style={{ padding: 0}}>
             {/* <span className="k-button k-flat k-primary" onClick={this.toggleDetails}>Details</span> */}
-            <Checkbox className="k-button k-flat k-primary"  label={"Select to compare"} />
+            <Checkbox className="k-button k-flat k-primary"  label={"Select to compare"} onChange={this.handleChange}/>
           </CardActions>
           </Card>
         );
