@@ -149,6 +149,7 @@ class App extends React.Component {
         if(this.state.selectedItemIds.indexOf(i.Id) > -1)
           selectedItems.push(i);
       });
+      return selectedItems;
     }
 
     // handlePageChange = (e) => {
