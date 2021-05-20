@@ -271,7 +271,7 @@ class App extends React.Component {
         this.setState({selectedItemIds: newselectedItemIds});          
       }
       else{
-        toast.warning("Compare rack is full!");
+        //toast.warning("Compare rack is full!");
         this.setState({ showFullRackError: true });
         setTimeout(() => {
           this.setState({ showFullRackError: false });
