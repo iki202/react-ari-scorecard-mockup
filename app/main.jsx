@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { ListView, ListViewHeader } from '@progress/kendo-react-listview';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { FloatingActionButton, Button, ButtonGroup } from '@progress/kendo-react-buttons';
+import { Badge, BadgeContainer } from "@progress/kendo-react-indicators";
 import { MultiSelect } from '@progress/kendo-react-dropdowns';
 import { filterBy } from "@progress/kendo-data-query";
 
@@ -241,17 +242,21 @@ class App extends React.Component {
       this.closeAllWins();
       this.setState({
         searchMode: mode,
-        selectedValues: null
+        selectedValues: null,
+        selectedItemIds: []
       })
     }
 
     handleSelectChange = (event) =>{      
-      this.setState({selectedValues: event.value})
+      this.setState({
+        selectedValues: event.value,
+        selectedItemIds: []
+      })
     }
 
     handleFilterChange = (event) => {
       this.setState({
-        data: filterBy(availableData.slice(), event.filter),
+        data: filterBy(availableData.slice(), event.filter)
       });
     };
 
@@ -338,7 +343,7 @@ class App extends React.Component {
                           initialWidth={KENDO_WIN_WIDTH} Item={m} onClose={this.windowClosed} onOpen={this.windowOpened} searchMode={searchMode}/>
               })
             }
-            {
+            {/*
               openDataItems && openDataItems.length > 0 && 
               <FloatingActionButton align={{ vertical: 'bottom', horizontal: 'end' }} icon={'gear'} 
 	              items={[{ icon: 'sort-asc', text: 'Organize' }, { icon: 'close', text: 'Close All'}]} 
@@ -358,6 +363,18 @@ class App extends React.Component {
                     }
                   }
                 }} />
+                */
+            }
+            {
+              selectedItemIds && selectedItemIds.length > 0 &&              
+              <div className='topcorner'>
+                <BadgeContainer>
+                  <FloatingActionButton text={'Compare'} align={{horizontal: 'end', vertical: 'top'}}    />
+                  <Badge align={{horizontal: 'end', vertical: 'top'}} position='edge' themeColor='success'>
+                    {selectedItemIds.length}
+                  </Badge>
+                </BadgeContainer>
+              </div>              
             }
           </div>
         );
