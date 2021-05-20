@@ -143,24 +143,32 @@ class App extends React.Component {
         this.openWindows = [];
     }
 
-    handlePageChange = (e) => {
-        this.setState({
-            skip: e.skip,
-            take: e.take
-        });
+    getSelectedItems = () => {
+      let selectedItems = [];
+      this.state.data.forEach(i => {
+        if(this.state.selectedItemIds.indexOf(i.Id) > -1)
+          selectedItems.push(i);
+      });
     }
 
-    scrollHandler = (event) => {
-        console.log("Scrolling...");
-        const e = event.nativeEvent;
-        console.log((e.target.scrollTop + 10) + " >= " + (e.target.scrollHeight - e.target.clientHeight));
-        if (e.target.scrollTop + 10 >= e.target.scrollHeight - e.target.clientHeight) {
-            const moreData = availableData.splice(0, 6);
-            if (moreData.length > 0) {
-                this.setState({ data: this.state.data.concat(moreData) });
-            }
-        }
-    }
+    // handlePageChange = (e) => {
+    //     this.setState({
+    //         skip: e.skip,
+    //         take: e.take
+    //     });
+    // }
+
+    // scrollHandler = (event) => {
+    //     console.log("Scrolling...");
+    //     const e = event.nativeEvent;
+    //     console.log((e.target.scrollTop + 10) + " >= " + (e.target.scrollHeight - e.target.clientHeight));
+    //     if (e.target.scrollTop + 10 >= e.target.scrollHeight - e.target.clientHeight) {
+    //         const moreData = availableData.splice(0, 6);
+    //         if (moreData.length > 0) {
+    //             this.setState({ data: this.state.data.concat(moreData) });
+    //         }
+    //     }
+    // }
 
     setOpenItems = (item) =>{
       console.log("Opening Id: " + item.Id); 
