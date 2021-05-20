@@ -15,12 +15,6 @@ export default class SClistViewItem extends React.Component {
                 item: this.props.dataItem
             });
         }
-
-        // if(JSON.stringify(prevProps.selectedItemIds) !== JSON.stringify(this.props.selectedItemIds)){
-        //     this.setState({
-        //         checked: (this.props.selectedItemIds.indexOf(this.props.dataItem.Id) > -1)
-        //     });
-        // }
     }
 
     toggleDetails = (e) => {
@@ -28,8 +22,7 @@ export default class SClistViewItem extends React.Component {
         this.props.setOpenItems(this.props.dataItem);
     }
 
-    handleChange = (e) => {
-      console.log("e.value " + e.value);
+    handleChange = (e) => {      
       if(e.value && this.props.addSelectedItemId)
         this.props.addSelectedItemId(this.props.dataItem.Id);
       

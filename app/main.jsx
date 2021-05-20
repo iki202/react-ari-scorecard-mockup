@@ -6,11 +6,14 @@ import { FloatingActionButton, Button, ButtonGroup } from '@progress/kendo-react
 import { Badge, BadgeContainer } from "@progress/kendo-react-indicators";
 import { MultiSelect } from '@progress/kendo-react-dropdowns';
 import { filterBy } from "@progress/kendo-data-query";
+import { Fade } from "@progress/kendo-react-animation";
+import { Notification, NotificationGroup} from "@progress/kendo-react-notification";
 
 import SClistViewItem from './SClistViewItem.jsx'
 import SCwindow from './SCwindow.jsx'
 
 import './kendo_default_all.css';
+
 
 const KENDO_WIN_WIDTH = 360;
 
@@ -133,7 +136,8 @@ class App extends React.Component {
 
           searchMode: 'p', //p: people d: devision c: company
           selectedValues: null,
-          selectedItemIds: []
+          selectedItemIds: [],
+          showFullRackError: false
         }
 
         this.openWindows = [];
@@ -260,10 +264,20 @@ class App extends React.Component {
       });
     };
 
-    addSelectedItemId = (id) => {
-      let newselectedItemIds = [... this.state.selectedItemIds];
-      newselectedItemIds.push(id);
-      this.setState({selectedItemIds: newselectedItemIds});
+    addSelectedItemId = (id) => {      
+      if(this.state.selectedItemIds.length !== 5){
+        let newselectedItemIds = [... this.state.selectedItemIds];
+        newselectedItemIds.push(id);
+        this.setState({selectedItemIds: newselectedItemIds});          
+      }
+      else{
+        toast.warning("Compare rack is full!");
+        this.setState({ showFullRackError: true });
+        setTimeout(() => {
+          this.setState({ showFullRackError: false });
+        }, 2000);
+        //console.log("Compare rack is full!!!!!");
+      }
     }
 
     removeSelectedItemId = (id) => {
@@ -272,16 +286,15 @@ class App extends React.Component {
 
     render() {
         //const { skip, take } = this.state;
-        const { data, openDataItem, openDataItems, openWinPositions, searchMode, selectedValues, selectedItemIds } = this.state;
+        const { data, openDataItem, openDataItems, openWinPositions, searchMode, selectedValues, selectedItemIds, showFullRackError } = this.state;
 
-        console.log(" this.state.selectedItemIds: "+JSON.stringify(selectedItemIds));
+        //console.log(" this.state.selectedItemIds: "+JSON.stringify(selectedItemIds));
 
         const MyCustomItem = props => <SClistViewItem {...props} 
                                         setOpenItems={this.setOpenItems} 
                                         searchMode={searchMode}
                                         addSelectedItemId={this.addSelectedItemId}
                                         removeSelectedItemId={this.removeSelectedItemId}
-                                        //selectedItemIds={selectedItemIds}
                                         selected={(selectedItemIds.indexOf(props.dataItem.Id) > -1)} />;
 
         return (
@@ -366,15 +379,37 @@ class App extends React.Component {
                 */
             }
             {
-              selectedItemIds && selectedItemIds.length > 0 &&              
+              selectedItemIds.length > 0 &&              
               <div className='topcorner'>
                 <BadgeContainer>
                   <FloatingActionButton text={'Compare'} align={{horizontal: 'end', vertical: 'top'}}    />
-                  <Badge align={{horizontal: 'end', vertical: 'top'}} position='edge' themeColor='success'>
+                  <Badge align={{horizontal: 'end', vertical: 'top'}} position='edge' themeColor={selectedItemIds.length < 5 ? 'success' : 'error'}>
                     {selectedItemIds.length}
                   </Badge>
                 </BadgeContainer>
               </div>              
+            }
+            {
+              <NotificationGroup
+                style={{
+                  right: 0,
+                  top: 80,
+                  alignItems: "flex-start",
+                  flexWrap: "wrap-reverse",
+                }}
+              >
+                <Fade enter exit>
+                  {showFullRackError && (
+                    <Notification
+                      type={{ style: "error", icon: false }}
+                      closable
+                      onClose={() => this.setState({ showFullRackError: false })}
+                    >
+                      <span>Compare rack is full!</span>
+                    </Notification>
+                  )}
+                </Fade>
+              </NotificationGroup>
             }
           </div>
         );
